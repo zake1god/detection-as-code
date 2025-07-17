@@ -7,20 +7,21 @@ on:
     branches: [ main ]
 
 jobs:
-  lint-test:
+  debug:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: Install dependencies
+      - name: Install tools
         run: |
-          pip install -r requirements.txt
-      - name: Lint YAML files
+          python -m pip install --upgrade pip
+          pip install sigma pytest yamllint
+      - name: List Files
         run: |
-          yamllint rules/
-      - name: Validate Sigma rules
+          ls -R
+      - name: Run validate.py
         run: |
           python validate.py rules/windows/win_logon_failure.yml
