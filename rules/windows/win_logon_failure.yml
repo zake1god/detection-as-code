@@ -1,0 +1,12 @@
+title: Windows Logon Failure
+id: a1b2c3d4
+description: Detects failed login attempts
+logsource:
+  category: security
+  product: windows
+detection:
+  selection:
+    EventID: 4625
+    Status: '0xC000006D'
+  condition: selection
+level: medium
